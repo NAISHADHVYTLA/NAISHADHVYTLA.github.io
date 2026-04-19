@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 — naishadh@portfolio</title>
+<meta name="description" content="404 — file not found.">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230a0a0a'/><text x='5' y='25' font-family='monospace' font-size='26' font-weight='700' fill='%2333ff00'>&gt;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=VT323&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0a;
+  --primary:#33ff00;
+  --secondary:#ffb000;
+  --muted:#1f521f;
+  --error:#ff3333;
+  --fg-dim:#66cc66;
+  --glow:0 0 5px rgba(51,255,0,.45);
+  --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+  --display:'VT323','JetBrains Mono',monospace;
+  color-scheme:dark;
+}
+html,body{background:var(--bg);color:var(--fg-dim);min-height:100vh}
+body{
+  font-family:var(--mono);
+  font-size:14px;
+  line-height:1.6;
+  font-variant-ligatures:none;
+  display:grid;
+  place-items:center;
+  padding:40px 24px;
+  overflow-x:hidden;
+}
+body::after{
+  content:"";
+  position:fixed; inset:0;
+  pointer-events:none; z-index:9998;
+  background:repeating-linear-gradient(to bottom,
+    rgba(0,0,0,0) 0 1px, rgba(0,0,0,.35) 1px 2px);
+  opacity:.28;
+  mix-blend-mode:multiply;
+}
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  pointer-events:none; z-index:9997;
+  background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.35) 100%);
+}
+main{
+  width:100%;
+  max-width:72ch;
+  text-align:left;
+}
+.art{
+  font-family:var(--mono);
+  color:var(--primary);
+  text-shadow:var(--glow);
+  font-size:clamp(10px, 1.8vw, 14px);
+  line-height:1;
+  font-weight:700;
+  white-space:pre;
+  overflow-x:auto;
+  margin-bottom:22px;
+}
+.prompt-line{font-size:13px;margin:18px 0 10px;word-break:break-all}
+.prompt{color:var(--primary);text-shadow:var(--glow);font-weight:500}
+.cmd{color:var(--fg-dim)}
+.err-tag{
+  background:var(--error);
+  color:var(--bg);
+  padding:1px 8px;
+  font-weight:700;
+  letter-spacing:.12em;
+  margin-right:8px;
+}
+.err-msg{color:var(--fg-dim);margin:6px 0}
+.err-path{color:var(--secondary);word-break:break-all}
+.err-back{color:var(--fg-dim);margin-top:18px}
+.err-count{color:var(--primary);text-shadow:var(--glow);font-variant-numeric:tabular-nums}
+.err-link{margin-top:10px;color:var(--muted);font-size:12px}
+.err-link a{color:var(--primary);text-shadow:var(--glow);text-decoration:none;border-bottom:1px dashed var(--primary)}
+.err-link a:hover,.err-link a:focus-visible{background:var(--primary);color:var(--bg);text-shadow:none;border-bottom-color:transparent;outline:0}
+.rule{color:var(--muted);margin:22px 0 12px;white-space:nowrap;overflow:hidden}
+.cursor{display:inline-block;color:var(--primary);text-shadow:var(--glow);animation:blink 1.1s steps(2) infinite}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@media (prefers-reduced-motion: reduce){
+  .cursor{animation:none}
+}
+</style>
+</head>
+<body>
+<main>
+  <pre class="art" aria-label="ASCII art reading 404">
+██╗  ██╗ ██████╗ ██╗  ██╗
+██║  ██║██╔═████╗██║  ██║
+███████║██║██╔██║███████║
+╚════██║████╔╝██║╚════██║
+     ██║╚██████╔╝     ██║
+     ╚═╝ ╚═════╝      ╚═╝</pre>
+
+  <div class="prompt-line">
+    <span class="prompt">naishadh@portfolio:~$</span>
+    <span class="cmd">cat <span class="err-path" id="err-path">/unknown</span></span>
+  </div>
+
+  <p class="err-msg"><span class="err-tag">ERR</span>no such file or directory</p>
+  <p class="err-msg">the resource you requested is not on this server.</p>
+
+  <div class="rule">============================================================</div>
+
+  <p class="err-back">&gt; returning to / in <span class="err-count" id="err-count">5</span>s<span class="cursor">█</span></p>
+  <p class="err-link">or <a href="/">press any key to go home</a> &middot; <a href="/#contact">report via mail</a></p>
+</main>
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var p = location.pathname || '/unknown';
+  if(location.search) p += location.search;
+  var pathEl = document.getElementById('err-path');
+  if(pathEl) pathEl.textContent = p;
+
+  var c = 5;
+  var el = document.getElementById('err-count');
+  if(reduce){ return; }
+  var iv = setInterval(function(){
+    c--;
+    if(el) el.textContent = c;
+    if(c <= 0){ clearInterval(iv); location.href = '/'; }
+  }, 1000);
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' || e.key === 'Enter' || e.key === ' ' || e.key.length === 1){
+      clearInterval(iv);
+      location.href = '/';
+    }
+  });
+})();
+</script>
+</body>
+</html>
